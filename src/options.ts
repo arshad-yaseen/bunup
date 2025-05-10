@@ -55,18 +55,8 @@ type DtsOptions = {
 	 * If it's a string or an array of strings, the file name (without extension)
 	 * will be used as the name for the output declaration file.
 	 *
-	 * @example
-	 * // Using a string path
-	 * entry: 'src/index.ts' // Generates index.d.ts
-	 *
-	 * // Using string paths in an array
-	 * entry: ['src/index.ts']  // Generates index.d.ts
-	 *
-	 * // Using named outputs as an object
-	 * entry: { myModule: 'src/index.ts', utils: 'src/utility-functions.ts' } // Generates myModule.d.ts and utils.d.ts
-	 *
-	 * // Organizing output with subdirectories
-	 * entry: { "client/index": "src/client/index.ts", "server/index": "src/server/index.ts" } // Generates client/index.d.ts and server/index.d.ts
+	 * @see https://bunup.dev/docs/guide/typescript-declarations#custom-entry-points
+	 * @see https://bunup.dev/docs/guide/typescript-declarations#named-entries
 	 */
 	entry?: Entry
 	/**
@@ -96,15 +86,7 @@ export interface BuildOptions {
 	 * If it's a string or an array of strings, the file name (without extension)
 	 * will be used as the name for the output file.
 	 *
-	 * @example
-	 * // Using a string path
-	 * entry: 'src/index.ts' // Generates index.js
-	 *
-	 * // Using string paths in an array
-	 * entry: ['src/index.ts']  // Generates index.js
-	 *
-	 * // Using named outputs as an object
-	 * entry: { myModule: 'src/index.ts', utils: 'src/utility-functions.ts' } // Generates myModule.js and utils.js
+	 * @see https://bunup.dev/docs/#entry-points
 	 */
 	entry: Entry
 
@@ -162,22 +144,6 @@ export interface BuildOptions {
 	 * Can also be configured with DtsOptions for more control
 	 */
 	dts?: boolean | DtsOptions
-
-	/**
-	 * Generate only TypeScript declaration files (.d.ts) without any JavaScript output
-	 * When set to true, bunup will skip the JavaScript bundling process entirely
-	 * and only generate declaration files for the specified entry points
-	 *
-	 * This is useful when you want to use bunup's fast declaration file generation
-	 * but handle the JavaScript bundling separately or not at all.
-	 *
-	 * Note: When this option is true, the `dts` option is implicitly set to true
-	 * and other bundling-related options are ignored.
-	 *
-	 * @example
-	 * dtsOnly: true
-	 */
-	dtsOnly?: boolean
 
 	/**
 	 * Path to a preferred tsconfig.json file to use for declaration generation

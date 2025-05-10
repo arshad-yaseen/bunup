@@ -58,10 +58,12 @@ export default defineConfig({
 		main: 'src/index.ts',
 		cli: 'src/cli.ts',
 	},
+	outdir: "dist",
 	dts: {
 		entry: {
-			// Generate types.d.ts from index.ts
-			types: 'src/index.ts',
+			types: 'src/index.ts', // Outputs to dist/types.d.ts
+			api: 'src/api/v1/index.ts', // Outputs to dist/api.d.ts
+			'nested/types': 'src/types.ts', // Outputs to dist/nested/types.d.ts
 		},
 	},
 });
@@ -117,27 +119,3 @@ export default defineConfig({
 	},
 });
 ```
-
-## Declaration-Only Generation
-
-If you want to generate only TypeScript declaration files without any JavaScript output, you can use the `dtsOnly` option:
-
-```sh
-# CLI
-bunup src/index.ts --dts-only
-
-# Configuration file
-export default defineConfig({
-      entry: ['src/index.ts'],
-      dtsOnly: true,
-});
-```
-
-When `dtsOnly` is set to `true`, Bunup will:
-
-- Skip the JavaScript bundling process entirely
-- Only generate declaration files for the specified entry points
-- Implicitly enable the `dts` option (no need to specify both)
-- Ignore other bundling-related options
-
-This is useful when you want to use Bunup's fast declaration file generation but handle the JavaScript bundling separately or not at all.
